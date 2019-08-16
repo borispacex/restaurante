@@ -9,10 +9,12 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 // import android.media.Image;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 // import org.w3c.dom.Text;
 
@@ -63,8 +65,16 @@ public class MainActivity extends AppCompatActivity {
         12, 10, 10, 15, 15, 5, 5, 10, 5, 15, 8, 5
     };
 
-    int cantidad = 0;
+    int pedido[] = {
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+
+    int apagar[] = {
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+
     int suma = 0;
+    int cantidad = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +95,9 @@ public class MainActivity extends AppCompatActivity {
         nomImg.setText(textos[indice]+" ");
         pimg.setImageResource(imagenes[indice]);
         tprecios.setText(precio[indice]+"");
-    }
 
-    public void ocultar(View vista) {
-
+        epagar.setText(apagar[indice]+"");
+        epedido.setText(pedido[indice]+"");
     }
 
     public void siguiente(View vista) {
@@ -98,26 +107,39 @@ public class MainActivity extends AppCompatActivity {
         pimg.setImageResource(imagenes[indice]);
         tprecios.setText(precio[indice]+"");
 
+        epagar.setText(apagar[indice]+"");
+        epedido.setText(pedido[indice]+"");
+
     }
 
     public void developer(View view) {
     }
 
     public void f(View view) {
+        Toast toast = Toast.makeText(this, "Pedido total: "+cantidad+"   -   "+"A pagar total: "+suma, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public void c(View view) {
-        cantidad = 0;
-        suma = 0;
+        for (int i=0; i< 12; i++) {
+            pedido[i] = 0;
+            apagar[i] = 0;
+        }
         epagar.setText("0");
         epedido.setText("0");
+        suma = 0;
+        cantidad = 0;
     }
 
     public void comprar(View view) {
-        cantidad++;
-        suma = suma + precio[indice];
-        epagar.setText(suma+"");
-        epedido.setText(cantidad+"");
+        pedido[indice] = pedido[indice] + 1;
+        apagar[indice] = apagar[indice] + precio[indice];
+
+        suma = suma + apagar[indice];
+        cantidad = cantidad + pedido[indice];
+
+        epagar.setText(apagar[indice]+"");
+        epedido.setText(pedido[indice]+"");
 
     }
 }
