@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TICO'S RESTAURANT"
-                android:textSize="40dp" />
+                android:textSize="35dp" />
 
         </LinearLayout>
 
@@ -67,19 +67,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginRight="6dp"
+            android:layout_marginLeft="6dp">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/antes"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
                 android:onClick="antes"
                 android:text="&#x25C0;" />
 
             <Button
                 android:id="@+id/comprar"
-                android:layout_width="95dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="comprar"
                 android:text="comprar" />
@@ -99,19 +100,19 @@
                 android:text="f" />
 
             <Button
-                android:id="@+id/developer"
-                android:layout_width="110dp"
+                android:id="@+id/devolver"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="developer"
-                android:text="developer"
+                android:onClick="devolver"
+                android:enabled="false"
+                android:text="devolver"
 
                 />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/siguiente"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
                 android:onClick="siguiente"
                 android:text="&#x25B6;" />
 

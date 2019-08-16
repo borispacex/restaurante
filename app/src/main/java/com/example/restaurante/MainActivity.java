@@ -11,6 +11,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText epedido;
     private EditText epagar;
 
+    private Button btnDevolver;
+    private Button btnComprar;
+
 
     int precio[] = {
         26, 32, 28, 25 ,30, 18, 15, 20, 12, 35, 18, 22
@@ -86,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         tprecios = (TextView) findViewById(R.id.textViewPrecio);
         epedido = (EditText) findViewById(R.id.inputpedido);
         epagar = (EditText) findViewById(R.id.inputpagar);
+        btnComprar = (Button) findViewById(R.id.comprar);
+        btnDevolver = (Button) findViewById(R.id.devolver);
     }
 
 
@@ -96,8 +102,14 @@ public class MainActivity extends AppCompatActivity {
         pimg.setImageResource(imagenes[indice]);
         tprecios.setText(precio[indice]+"");
 
-        epagar.setText(apagar[indice]+"");
+        epagar.setText(suma+"");
         epedido.setText(pedido[indice]+"");
+
+        if (pedido[indice] == 0) {
+            btnDevolver.setEnabled(false);
+        }else{
+            btnDevolver.setEnabled(true);
+        }
     }
 
     public void siguiente(View vista) {
@@ -107,12 +119,29 @@ public class MainActivity extends AppCompatActivity {
         pimg.setImageResource(imagenes[indice]);
         tprecios.setText(precio[indice]+"");
 
-        epagar.setText(apagar[indice]+"");
+        epagar.setText(suma+"");
         epedido.setText(pedido[indice]+"");
 
+        if (pedido[indice] == 0) {
+            btnDevolver.setEnabled(false);
+        }else{
+            btnDevolver.setEnabled(true);
+        }
     }
 
-    public void developer(View view) {
+    public void devolver(View view) {
+        if (pedido[indice] > 0) {
+
+            pedido[indice] = pedido[indice] - 1;
+            apagar[indice] = apagar[indice] - precio[indice];
+
+            suma = suma - precio[indice];
+            cantidad = cantidad - 1;
+
+            epagar.setText(suma+"");
+            epedido.setText(pedido[indice]+"");
+        }
+        if (pedido[indice] == 0) btnDevolver.setEnabled(false);
     }
 
     public void f(View view) {
@@ -129,17 +158,19 @@ public class MainActivity extends AppCompatActivity {
         epedido.setText("0");
         suma = 0;
         cantidad = 0;
+        btnDevolver.setEnabled(false);
     }
 
     public void comprar(View view) {
         pedido[indice] = pedido[indice] + 1;
         apagar[indice] = apagar[indice] + precio[indice];
 
-        suma = suma + apagar[indice];
-        cantidad = cantidad + pedido[indice];
+        suma = suma + precio[indice];
+        cantidad = cantidad + 1;
 
-        epagar.setText(apagar[indice]+"");
+        epagar.setText(suma+"");
         epedido.setText(pedido[indice]+"");
 
+        btnDevolver.setEnabled(true);
     }
 }
